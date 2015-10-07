@@ -8,9 +8,9 @@
 {% if rabbitmq_ssl %}
     {ssl_listeners, [{"{{ rabbitmq_ssl_bind_address }}", {{ rabbitmq_ssl_port }}}]},
     {ssl_options, [
-      {cacertfile, "{{rabbitmq_cacert_file}}"},
-      {certfile, "{{rabbitmq_cert_file}}"},
-      {keyfile, "{{rabbitmq_key_file}}"},
+      {cacertfile, "{{ rabbitmq_cacert_file }}"},
+      {certfile, "{{ rabbitmq_cert_file }}"},
+      {keyfile, "{{ rabbitmq_key_file }}"},
       {verify, verify_peer},
       {fail_if_no_peer_cert, true},
       {ciphers, [
