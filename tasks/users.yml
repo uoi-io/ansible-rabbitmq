@@ -1,0 +1,24 @@
+# file: roles/rabbitmq/tasks/users.yml
+---
+- name: Create the RabbitMQ user(s)
+  rabbitmq_user:
+    user={{ item.user }}
+    password={{ item.password }}
+    vhost={{ item.vhost | default('/', false) }}
+    tags={{ (item.tags | default('')) | join(',') }}
+    configure_priv={{ item.configure_priv | default('.*') }}
+    read_priv={{ item.read_priv | default('.*') }}
+    write_priv={{ item.write_priv | default('.*') }}
+    state=present
+    force={{ item.force|default('yes') }}
+  with_items: rabbitmq_users_list
+  when: inventory_hostname == "{{master}}"
+  tags: rabbitmq-users
+
+- name: Delete the default guest RabbitMQ user
+  rabbitmq_user:
+    user=guest
+    vhost=/
+    state=absent
+  when: inventory_hostname == "{{master}}"
+  tags: rabbitmq-guest-user

@@ -1,0 +1,24 @@
+[
+  {rabbit, [
+{% if rabbitmq_bind_address and not rabbitmq_ssl %}
+    {tcp_listeners, [{"{{ rabbitmq_bind_address }}", {{ rabbitmq_port }}}]},
+{% else %}
+    {tcp_listeners, []},
+{% endif %}
+{% if rabbitmq_ssl %}
+    {ssl_listeners, [{"{{ rabbitmq_ssl_bind_address }}", {{ rabbitmq_ssl_port }}}]},
+    {ssl_options, [
+      {cacertfile, "{{rabbitmq_cacert_file}}"},
+      {certfile, "{{rabbitmq_cert_file}}"},
+      {keyfile, "{{rabbitmq_key_file}}"},
+      {verify, verify_peer},
+      {fail_if_no_peer_cert, true},
+      {ciphers, [
+        {dhe_rsa,aes_256_cbc,sha},
+        {dhe_dss,aes_256_cbc,sha},
+        {rsa,aes_256_cbc,sha}
+      ]}
+    ]}
+{% endif %}
+  ]}
+].

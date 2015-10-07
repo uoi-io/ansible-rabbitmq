@@ -1,0 +1,58 @@
+# file: roles/rabbitmq/default/main.yml
+---
+# CONFIG
+rabbitmq_erlang_cookie: "{{ rabbitmq_erlang_cookie | default('AbCd3rl4ngC00k13WxYz') }}"
+rabbitmq_clustering: true
+rabbitmq_cluster_name: "{{ rabbitmq_cluster_name | default('rabbit') }}"
+rabbitmq_reset_cluster: false
+rabbitmq_management_plugin: true
+rabbitmq_ssl: true
+rabbitmq_bind_address: 0.0.0.0
+rabbitmq_port: 5672
+rabbitmq_fd_limits: 65536
+
+# SSL
+rabbitmq_cacert_file: etc/rabbitmq/ssl/cacert.pem
+rabbitmq_cert_file: etc/rabbitmq/ssl/cert.pem
+rabbitmq_key_file: etc/rabbitmq/ssl/key.pem
+rabbitmq_ssl_bind_address: 0.0.0.0
+rabbitmq_ssl_port: 5671
+
+# VHOSTS
+rabbitmq_vhost_list:
+  - name: glance
+  - name: nova
+  - name: cinder
+  - name: ceilometer
+  - name: heat
+  - name: keystone
+  - name: trove
+
+# USERS
+rabbitmq_users_list:
+  - vhost: glance
+    user: glance
+    password: "{{ rabbitmq_glance_password | default('gl4nc3p4ssw0rd') }}"
+  - vhost: nova
+    user: nova
+    password: "{{ rabbitmq_nova_password | default('n0v4p4ssw0rd') }}"
+  - vhost: cinder
+    user: cinder
+    password: "{{ rabbitmq_cinder_password | default('cind3rp4ssw0rd') }}"
+  - vhost: ceilometer
+    user: ceilometer
+    password: "{{ rabbitmq_ceilometer_password | default('ceil0m3terp4ssw0rd') }}"
+  - vhost: heat
+    user: heat
+    password: "{{ rabbitmq_heat_password | default('he4tp4ssw0rd') }}"
+  - vhost: keystone
+    user: keystone
+    password: "{{ rabbitmq_keystone_password | default('keyst0n3p4ssw0rd') }}"
+  - vhost: trove
+    user: trove
+    password: "{{ rabbitmq_trove_password | default('tr0vep4ssw0rd') }}"
+  - vhost: /
+    user: admin
+    password: "{{ rabbitmq_admin_password }}"
+    tags:
+    - administrator

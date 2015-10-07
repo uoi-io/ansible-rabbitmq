@@ -1,0 +1,16 @@
+# file: roles/rabbitmq/tasks/limits.yml
+---
+- name: Increase the file descriptors limit (part 1)
+  template: src=etc/security/limits.d/rabbitmq.conf dest=/etc/security/limits.d/rabbitmq.conf
+    owner=root
+    group=root
+    mode=0644
+  tags: rabbitmq-limits
+
+- name: Increase the file descriptors limit (part 2)
+  template: src=etc/default/rabbitmq-server dest=/etc/default/rabbitmq-server
+    owner=root
+    group=root
+    mode=0644
+  when: ansible_os_family == "Debian"
+  tags: rabbitmq-limits
