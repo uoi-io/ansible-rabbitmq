@@ -1,0 +1,1 @@
+Ansible RabbitMQ HA module
