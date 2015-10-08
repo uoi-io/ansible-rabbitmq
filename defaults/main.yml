@@ -6,10 +6,13 @@ rabbitmq_clustering: true
 rabbitmq_cluster_name: "{{ rabbitmq_cluster_name | default('rabbit') }}"
 rabbitmq_reset_cluster: false
 rabbitmq_management_plugin: true
-rabbitmq_ssl: true
+rabbitmq_ssl: false
 rabbitmq_bind_address: 0.0.0.0
 rabbitmq_port: 5672
-rabbitmq_fd_limits: 65536
+rabbitmq_fd_limits: "{{ rabbitmq_fd_limits | default('1024') }}"
+rabbitmq_vm_memory: "{{ rabbitmq_vm_memory | default('0.4') }}"
+rabbitmq_vm_memory_ratio: "{{ rabbitmq_vm_memory_ratio | default('0.5') }}"
+rabbitmq_mem_relative: "{{ rabbitmq_mem_relative | default('1.0') }}"
 
 # SSL
 rabbitmq_cacert_file: etc/rabbitmq/ssl/cacert.pem
