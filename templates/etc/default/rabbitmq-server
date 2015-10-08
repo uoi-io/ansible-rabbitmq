@@ -1,1 +1,0 @@
-ulimit -n {{ rabbitmq_fd_limits }}
