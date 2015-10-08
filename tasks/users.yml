@@ -12,7 +12,7 @@
     state=present
     force={{ item.force|default('yes') }}
   with_items: rabbitmq_users_list
-  when: inventory_hostname == "{{master}}"
+  when: inventory_hostname == master
   tags: rabbitmq-users
 
 - name: Delete the default guest RabbitMQ user
@@ -20,5 +20,5 @@
     user=guest
     vhost=/
     state=absent
-  when: inventory_hostname == "{{master}}"
+  when: inventory_hostname == master
   tags: rabbitmq-guest-user

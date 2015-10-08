@@ -1,4 +1,4 @@
-# file: roles/rabbitmq/tasks/configuration.yaml
+# file: roles/rabbitmq/tasks/configuration.yml
 ---
 - name: Creating SSL folder in /etc/rabbitmq/
   file: path=/etc/rabbitmq/ssl
@@ -17,11 +17,11 @@
     group=rabbitmq
     mode=0600
   with_items:
-    - src: "{{rabbitmq_cacert_file}}"
+    - src: "{{ rabbitmq_cacert_file }}"
       dest: /etc/rabbitmq/ssl/cacert.pem
-    - src: "{{rabbitmq_cert_file}}"
+    - src: "{{ rabbitmq_cert_file }}"
       dest: /etc/rabbitmq/ssl/cert.pem
-    - src: "{{rabbitmq_key_file}}"
+    - src: "{{ rabbitmq_key_file }}"
       dest: /etc/rabbitmq/ssl/key.pem
   when: rabbitmq_ssl
   tags: rabbitmq-ssl

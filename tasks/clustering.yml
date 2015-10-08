@@ -10,41 +10,41 @@
 
 - name: Starting RabbitMQ service on the master node
   service: name=rabbitmq-server state=restarted
-  when: inventory_hostname == "{{master}}"
+  when: inventory_hostname == master
   tags: rabbitmq-cluster
 
 - name: Starting RabbitMQ App only on master node
   command: rabbitmqctl start_app
-  when: inventory_hostname == "{{master}}"
+  when: inventory_hostname == master
   tags: rabbitmq-cluster
 
 - name: Set the RabbitMQ cluster name
-  command: rabbitmqctl set_cluster_name "{{rabbitmq_cluster_name}}"
-  when: inventory_hostname == "{{master}}"
+  command: rabbitmqctl set_cluster_name "{{ rabbitmq_cluster_name }}"
+  when: inventory_hostname == master
   tags: rabbitmq-cluster
 
 - name: Starting RabbitMQ service everywhere
   service: name=rabbitmq-server state=restarted
-  when: inventory_hostname != "{{master}}"
+  when: inventory_hostname != master
   tags: rabbitmq-cluster
 
 - name: Stopping the RabbitMQ application
   command: rabbitmqctl stop_app
-  when: inventory_hostname != "{{master}}"
+  when: inventory_hostname != master
   tags: rabbitmq-cluster
 
 - name: Makeing slave nodes joining the RabbitMQ cluster
-  command: rabbitmqctl join_cluster "rabbit@{{master_name}}"
-  when: inventory_hostname != "{{master}}"
+  command: rabbitmqctl join_cluster "rabbit@{{ master_name }}"
+  when: inventory_hostname != master
   tags: rabbitmq-cluster
 
 - name: Starting RabbitMQ App only on slave node(s)
   command: rabbitmqctl start_app
-  when: inventory_hostname != "{{master}}"
+  when: inventory_hostname != master
   tags: rabbitmq-cluster
 
 - name: Finalize the setup by creating file /etc/rabbitmq/clustered
-  copy: content="Cluster created:{{ansible_date_time.date}}" dest=/etc/rabbitmq/clustered
+  copy: content="Cluster created:{{ ansible_date_time.date }}" dest=/etc/rabbitmq/clustered
     owner=rabbitmq
     group=rabbitmq
   tags: rabbitmq-cluster
