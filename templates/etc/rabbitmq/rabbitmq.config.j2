@@ -20,8 +20,9 @@
       ]}
     ]}
 {% endif %}
-    {vm_memory_high_watermark, {{ rabbitmq_vm_memory }}},
-    {vm_memory_high_watermark_paging_ratio, {{ rabbitmq_vm_memory_ratio }}},
-    {disk_free_limit, {mem_relative, {{ rabbitmq_mem_relative }}}}
+    {vm_memory_high_watermark, {{ rabbitmq_vm_memory | default(0.4) }}},
+    {vm_memory_high_watermark_paging_ratio, {{ rabbitmq_vm_memory_ratio | default(0.5) }}},
+    {disk_free_limit, {mem_relative, {{ rabbitmq_mem_relative | default(1) }}}},
+    {heartbeat, {{ rabbitmq_heartbeat | default(580) }}}
   ]}
 ].
