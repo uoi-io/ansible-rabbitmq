@@ -1,0 +1,3 @@
+# file: roles/rabbitmq/handlers/systemctl-reload.yml
+---
+- include: systemctl-reload.yml

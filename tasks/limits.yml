@@ -8,4 +8,5 @@
     owner=root
     group=root
     mode=0644
+  notify: systemctl reload
   tags: rabbitmq-limits

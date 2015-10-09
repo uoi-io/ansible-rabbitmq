@@ -1,0 +1,4 @@
+# file: roles/rabbitmq/handlers/systemctl-reload.yml
+---
+- name: systemctl reload
+  command: /usr/bin/systemctl --system daemon-reload
