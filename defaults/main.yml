@@ -1,9 +1,9 @@
 # file: roles/rabbitmq/default/main.yml
 ---
 # CONFIG
-rabbitmq_erlang_cookie: "{{ rabbitmq_erlang_cookie_v | default('AbCd3rl4ngC00k13WxYz') }}"
+rabbitmq_erlang_cookie: "{{ rabbitmq_erlang_cookie | default('AbCd3rl4ngC00k13WxYz') }}"
 rabbitmq_clustering: true
-rabbitmq_cluster_name: "{{ rabbitmq_cluster_name_v | default('rabbit') }}"
+rabbitmq_cluster_name: "{{ rabbitmq_cluster_name | default('rabbit') }}"
 rabbitmq_reset_cluster: false
 rabbitmq_management_plugin: true
 rabbitmq_ssl: false
