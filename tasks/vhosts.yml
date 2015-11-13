@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/vhosts.yml
 ---
+# file: roles/rabbitmq/tasks/vhosts.yml
 - name: Create RabbitMQ vhost(s)
   rabbitmq_vhost: >
     name={{ item.name }}

@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/users.yml
 ---
+# file: roles/rabbitmq/tasks/users.yml
 - name: Create the RabbitMQ user(s)
   rabbitmq_user:
     user={{ item.user }}

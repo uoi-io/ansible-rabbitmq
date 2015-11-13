@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/main.yml
 ---
+# file: roles/rabbitmq/tasks/main.yml
 - include: repository.yml
 - include: install.yml
 - include: erlang.yml

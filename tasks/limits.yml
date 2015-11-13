@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/limits.yml
 ---
+# file: roles/rabbitmq/tasks/limits.yml
 - file: path=/etc/systemd/system/rabbitmq-server.service.d state=directory
 
 - name: Increase file descriptor limit via Systemd

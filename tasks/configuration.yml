@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/configuration.yml
 ---
+# file: roles/rabbitmq/tasks/configuration.yml
 - name: Creating SSL folder in /etc/rabbitmq/
   file: path=/etc/rabbitmq/ssl
     owner=rabbitmq

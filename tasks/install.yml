@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/install.yml
 ---
+# file: roles/rabbitmq/tasks/install.yml
 - name: Install RabbitMQ packages
   apt: name=rabbitmq-server state=latest update_cache=yes
   tags: rabbitmq-package

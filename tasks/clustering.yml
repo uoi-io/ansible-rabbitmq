@@ -1,5 +1,5 @@
-# file: roles/rabbitmq/tasks/clustering.yml
 ---
+# file: roles/rabbitmq/tasks/clustering.yml
 - name: Killing all RabbitMQ processes
   shell: pkill -9 -u rabbitmq || true
   tags: rabbitmq-cluster
