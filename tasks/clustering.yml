@@ -33,7 +33,7 @@
   when: inventory_hostname != master
   tags: rabbitmq-cluster
 
-- name: Makeing slave nodes joining the RabbitMQ cluster
+- name: Making slave nodes joining the RabbitMQ cluster
   command: rabbitmqctl join_cluster "rabbit@{{ master_name }}"
   when: inventory_hostname != master
   tags: rabbitmq-cluster

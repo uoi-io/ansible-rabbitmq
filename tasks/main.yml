@@ -5,7 +5,9 @@
 - include: erlang.yml
 - include: configuration.yml
 - include: limits.yml
+- include: firewall.yml
 
+# clustered variable is exported and will be used as a condition
 - name: Checking if a RabbitMQ cluster already exists
   stat: path=/etc/rabbitmq/clustered
   register: clustered

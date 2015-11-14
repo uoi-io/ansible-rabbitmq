@@ -1,0 +1,38 @@
+---
+# file: roles/rabbitmq/tasks/firewall.yml
+- name: epmd firewalld rule
+  firewalld: port={{ fw_epmd }}
+    permanent=true
+    state=enabled
+    immediate=true
+  tags: rabbitmq-firewall
+
+- name: Erlang distribution firewalld rule
+  firewalld: port={{ fw_erlang_distrib }}
+    permanent=true
+    state=enabled
+    immediate=true
+  tags: rabbitmq-firewall
+
+- name: RabbitMQ firewalld rule
+  firewalld: port={{ fw_rabbitmq }}
+    permanent=true
+    state=enabled
+    immediate=true
+  tags: rabbitmq-firewall
+
+- name: RabbitMQ SSL firewalld rule
+  firewalld: port={{ fw_rabbitmq_ssl }}
+    permanent=true
+    state=enabled
+    immediate=true
+  when: rabbitmq_ssl
+  tags: rabbitmq-firewall
+
+- name: RabbitMQ SSL firewalld rule
+  firewalld: port={{ fw_management }}
+    permanent=true
+    state=enabled
+    immediate=true
+  when: rabbitmq_management_plugin
+  tags: rabbitmq-firewall

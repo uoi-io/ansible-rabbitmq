@@ -1,1 +1,9 @@
+---
 # file: roles/rabbitmq/vars/main.yml
+
+# FIREWALL PORTS
+fw_epmd: 4369/tcp
+fw_erlang_distrib: 25672/tcp
+fw_rabbitmq: 5672/tcp
+fw_rabbitmq_ssl: 5671/tcp
+fw_management: 15672/tcp
