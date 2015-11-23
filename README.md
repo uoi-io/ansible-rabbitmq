@@ -71,6 +71,7 @@ rabbitmq_users_list:
 ```
 
 ### POLICIES
+Please have a look on the rabbitmq-policy module: http://docs.ansible.com/ansible/rabbitmq_policy_module.html
 ```
 rabbitmq_policies_list:
   - name: HA-Glance
