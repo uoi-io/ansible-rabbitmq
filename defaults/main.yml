@@ -61,3 +61,46 @@ rabbitmq_users_list:
     password: "{{ rabbitmq_admin_password }}"
     tags:
     - administrator
+
+# POLICIES
+rabbitmq_policies_list:
+  - name: HA-Glance
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: glance
+  - name: HA-Nova
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: nova
+  - name: HA-Cinder
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: cinder
+  - name: HA-Ceilometer
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: ceilometer
+  - name: HA-Heat
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: heat
+  - name: HA-Keystone
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: keystone
+  - name: HA-Trove
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: trove
+  - name: HA
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: /

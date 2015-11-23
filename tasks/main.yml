@@ -20,4 +20,5 @@
 
 - include: plugins.yml
 - include: vhosts.yml
+- include: policiess.yml
 - include: users.yml

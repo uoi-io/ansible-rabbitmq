@@ -1,0 +1,15 @@
+---
+# file: roles/rabbitmq/tasks/policies.yml
+- name: Create RabbitMQ policies
+  rabbitmq_policy:
+    name: "{{ item.name }}"
+    pattern: "{{ item.pattern | default('^$') }}"
+    priority: "{{ item.priority | default(1) }}"
+    state: "{{ item.tags | default('present') }}"
+    tags: "{{ item.tags | default('') }}"
+    vhost: "{{ item.vhost | default('/') }}"
+  with_items: "{{ rabbitmq_policies_list }}"
+  when: inventory_hostname == master
+  tags:
+    - rabbitmq
+    - rabbitmq-policies

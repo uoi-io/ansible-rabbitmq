@@ -70,6 +70,21 @@ rabbitmq_users_list:
     - administrator
 ```
 
+### POLICIES
+```
+rabbitmq_policies_list:
+  - name: HA-Glance
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: glance
+  - name: HA
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: /
+```
+
 ## Dependencies
 None.
 
