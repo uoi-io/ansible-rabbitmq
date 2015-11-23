@@ -1,20 +1,32 @@
 ---
 # file: roles/rabbitmq/tasks/install.yml
-- name: Install RabbitMQ packages
-  apt: name=rabbitmq-server state=latest update_cache=yes
+- name: Install RabbitMQ packages (Debian)
+  apt:
+    name=rabbitmq-server
+    state=latest
+    update_cache=yes
   when: ansible_distribution == 'Debian'
-  tags: rabbitmq-package
+  tags:
+    - rabbitmq
+    - rabbitmq-package
 
-- name: Install RabbitMQ packages
-  yum: name="{{ item }}"
+- name: Install RabbitMQ packages (CentOS)
+  yum:
+    name="{{ item }}"
     state=present
   with_items:
     - https://www.rabbitmq.com/releases/erlang/erlang-18.1-1.el7.centos.x86_64.rpm
     - https://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
   notify: systemctl reload
   when: ansible_distribution == 'CentOS'
-  tags: rabbitmq-package
+  tags:
+    - rabbitmq
+    - rabbitmq-package
 
 - name: Enable RabbitMQ service
-  service: name=rabbitmq-server enabled=yes
-  tags: rabbitmq-service
+  service:
+    name=rabbitmq-server
+    enabled=yes
+  tags:
+    - rabbitmq
+    - rabbitmq-package

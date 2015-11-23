@@ -1,14 +1,20 @@
 ---
 # file: roles/rabbitmq/tasks/repository.yml
 - name: Install RabbitMQ repository
-  apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main'
+  apt_repository:
+    repo='deb http://www.rabbitmq.com/debian/ testing main'
     state=present
     update_cache=true
   when: ansible_os_family == 'Debian'
-  tags: rabbitmq-repo
+  tags:
+    - rabbitmq
+    - rabbitmq-repo
 
 - name: Add key for RabbitMQ Apt repository
-  apt_key: url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  apt_key:
+    url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
     state=present
   when: ansible_os_family == 'Debian'
-  tags: rabbitmq-repo
+  tags:
+    - rabbitmq
+    - rabbitmq-repo

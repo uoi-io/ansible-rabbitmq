@@ -1,13 +1,16 @@
 ---
 # file: roles/rabbitmq/tasks/configuration.yml
 - name: Creating SSL folder in /etc/rabbitmq/
-  file: path=/etc/rabbitmq/ssl
+  file:
+    path=/etc/rabbitmq/ssl
     owner=rabbitmq
     group=rabbitmq
     mode=0750
     state=directory
   when: rabbitmq_ssl
-  tags: rabbitmq-ssl
+  tags:
+    - rabbitmq
+    - rabbitmq-ssl
 
 - name: Copying SSL certificates in /etc/rabbitmq/ssl/
   copy:
@@ -24,7 +27,9 @@
     - src: "{{ rabbitmq_key_file }}"
       dest: /etc/rabbitmq/ssl/key.pem
   when: rabbitmq_ssl
-  tags: rabbitmq-ssl
+  tags:
+    - rabbitmq
+    - rabbitmq-ssl
 
 - name: Configuring SSL for RabbitMQ
   template:
@@ -33,4 +38,6 @@
     owner=rabbitmq
     group=rabbitmq
     mode=0644
-  tags: rabbitmq-ssl
+  tags:
+    - rabbitmq
+    - rabbitmq-ssl

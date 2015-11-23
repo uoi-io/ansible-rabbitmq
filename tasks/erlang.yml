@@ -1,8 +1,12 @@
 ---
 # file: roles/rabbitmq/tasks/erlang.yml
 - name: Set Erlang cookie for each RabbitMQ node
-  copy: content="{{ rabbitmq_erlang_cookie }}" dest=/var/lib/rabbitmq/.erlang.cookie
+  copy:
+    content="{{ rabbitmq_erlang_cookie }}"
+    dest=/var/lib/rabbitmq/.erlang.cookie
     owner=rabbitmq
     group=rabbitmq
     mode=0400
-  tags: rabbitmq-cookie
+  tags:
+    - rabbitmq
+    - rabbitmq-cookie

@@ -10,10 +10,12 @@
     read_priv={{ item.read_priv | default('.*') }}
     write_priv={{ item.write_priv | default('.*') }}
     state=present
-    force={{ item.force|default('yes') }}
-  with_items: rabbitmq_users_list
+    force={{ item.force | default('yes') }}
+  with_items: "{{ rabbitmq_users_list }}"
   when: inventory_hostname == master
-  tags: rabbitmq-users
+  tags:
+    - rabbitmq
+    - rabbitmq-users
 
 - name: Delete the default guest RabbitMQ user
   rabbitmq_user:
@@ -21,4 +23,7 @@
     vhost=/
     state=absent
   when: inventory_hostname == master
-  tags: rabbitmq-guest-user
+  tags:
+    - rabbitmq
+    - rabbitmq-users
+    - rabbitmq-guest-user
