@@ -92,6 +92,56 @@ None.
 ## Example Playbook
 Please have a look on the "Role Variables" section to have some examples.
 
+### Single node
+```
+rabbitmq_admin_password: 'Myv3RY5tr0ngPa33w0RD'
+rabbitmq_firewalld: true
+rabbitmq_management_plugin: true
+rabbitmq_bind_address: 0.0.0.0
+rabbitmq_port: 5672
+
+rabbitmq_users_list:
+  - vhost: /
+    user: admin
+    password: "{{ rabbitmq_admin_password }}"
+    tags:
+    - administrator
+```
+
+### Cluster
+```
+rabbitmq_admin_password: 'Myv3RY5tr0ngPa33w0RD'
+rabbitmq_firewalld: true
+rabbitmq_management_plugin: true
+rabbitmq_bind_address: 0.0.0.0
+rabbitmq_port: 5672
+
+rabbitmq_users_list:
+  - vhost: /
+    user: admin
+    password: "{{ rabbitmq_admin_password }}"
+    tags:
+    - administrator
+
+rabbitmq_vhost_list:
+  - name: glance
+
+rabbitmq_vhost_list:
+  - name: glance
+
+rabbitmq_policies_list:
+  - name: HA-Glance
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: glance
+  - name: HA
+    pattern: .*
+    tags:
+      ha-mode: all
+    vhost: /
+```
+
 ## License
 Apache
 
