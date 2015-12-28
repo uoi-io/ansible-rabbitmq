@@ -29,6 +29,13 @@ rabbitmq_heartbeat: 10
 ```
 
 ### CLUSTER
+Two more variables should be declared when clustering is used:
+```
+master: node-1
+rabbitmq_master_name: node-1
+```
+These two variables allow you to define who is the master and which name should have the master node.
+
 When rabbitmq_reset_cluster variable is set to true, the task will destroy the current cluster and wipe all data related to this cluster. 
 ```
 rabbitmq_clustering: true
