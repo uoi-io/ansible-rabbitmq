@@ -41,7 +41,7 @@
     - rabbitmq
     - rabbitmq-firewall
 
-- name: RabbitMQ SSL firewalld rule
+- name: RabbitMQ management plugin rule
   firewalld:
     port={{ fw_management }}
     permanent=true
