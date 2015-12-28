@@ -126,9 +126,6 @@ rabbitmq_users_list:
 rabbitmq_vhost_list:
   - name: glance
 
-rabbitmq_vhost_list:
-  - name: glance
-
 rabbitmq_policies_list:
   - name: HA-Glance
     pattern: .*
