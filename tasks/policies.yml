@@ -5,7 +5,7 @@
     name: "{{ item.name }}"
     pattern: "{{ item.pattern | default('^$') }}"
     priority: "{{ item.priority | default(1) }}"
-    state: "{{ item.tags | default('present') }}"
+    state: "{{ item.state | default('present') }}"
     tags: "{{ item.tags | default('') }}"
     vhost: "{{ item.vhost | default('/') }}"
   with_items: "{{ rabbitmq_policies_list }}"
