@@ -117,6 +117,8 @@ rabbitmq_users_list:
 
 ### Cluster
 ```
+master: node-1
+rabbitmq_master_name: node-1
 rabbitmq_admin_password: 'Myv3RY5tr0ngPa33w0RD'
 rabbitmq_firewalld: true
 rabbitmq_management_plugin: true
