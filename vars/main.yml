@@ -7,3 +7,7 @@ fw_erlang_distrib: 25672/tcp
 fw_rabbitmq: 5672/tcp
 fw_rabbitmq_ssl: 5671/tcp
 fw_management: 15672/tcp
+
+rabbitmq_packages:
+  - https://www.rabbitmq.com/releases/erlang/erlang-18.1-1.el7.centos.x86_64.rpm
+  - https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-3.6.0-1.noarch.rpm

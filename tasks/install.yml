@@ -14,9 +14,7 @@
   yum:
     name="{{ item }}"
     state=present
-  with_items:
-    - https://www.rabbitmq.com/releases/erlang/erlang-18.1-1.el7.centos.x86_64.rpm
-    - https://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
+  with_items: "{{ rabbitmq_packages }}"
   notify: systemctl reload
   when: ansible_distribution == 'CentOS'
   tags:
