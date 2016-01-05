@@ -1,4 +1,4 @@
-# Ansible RabbitMQ
+# Ansible RabbitMQ (OpenStack ready)
 This module provides a support for the installation of RabbitMQ.
 
 Supported distributions:
@@ -10,7 +10,7 @@ Two methods are supported:
 - Deploy a RabbitMQ HA cluster
 
 ## Requirements
-Ansible 1.9
+This module needs at least 3 nodes and Ansible 1.9.
 
 ## Role Variables
 rabbitmq_fd_limits will increase the file descriptors limit for the RabbitMQ service.
@@ -152,4 +152,4 @@ rabbitmq_policies_list:
 Apache
 
 ## Author Information
-This role was created in 2015 by Gaëtan Trellu (goldyfruit).
+This role was created in 2016 by Gaëtan Trellu (goldyfruit).
