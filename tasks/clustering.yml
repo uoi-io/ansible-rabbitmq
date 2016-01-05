@@ -53,6 +53,10 @@
     - rabbitmq
     - rabbitmq-cluster
 
+- pause:
+    prompt="Waiting few seconds..."
+    seconds=5
+
 - name: Making slave nodes joining the RabbitMQ cluster
   command: /usr/sbin/rabbitmqctl join_cluster "rabbit@{{ rabbitmq_master_name }}"
   when: inventory_hostname != master
