@@ -2,8 +2,9 @@
 This module provides a support for the installation of RabbitMQ.
 
 Supported distributions:
-- Centos 7
-- Debian 7/8
+- CentOS 7.x
+- RedHat EL 7.x
+- Debian 7.x/8.x
 
 Two methods are supported:
 - Deploy a RabbitMQ single node

@@ -1,30 +1,22 @@
 ---
 # file: roles/rabbitmq/tasks/install.yml
-- name: Install RabbitMQ packages (Debian)
+- name: Install RabbitMQ packages (Debian family)
   apt:
     name=rabbitmq-server
     state=latest
     update_cache=yes
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
   tags:
     - rabbitmq
     - rabbitmq-package
 
-- name: Install RabbitMQ packages (CentOS)
+- name: Install RabbitMQ packages (RedHat family)
   yum:
     name="{{ item }}"
     state=present
-  with_items: "{{ rabbitmq_packages }}"
+  with_items: "{{ rabbitmq_rh_packages }}"
   notify: systemctl reload
-  when: ansible_distribution == 'CentOS'
-  tags:
-    - rabbitmq
-    - rabbitmq-package
-
-- name: Enable RabbitMQ service
-  service:
-    name=rabbitmq-server
-    enabled=yes
+  when: ansible_os_family == 'RedHat'
   tags:
     - rabbitmq
     - rabbitmq-package
