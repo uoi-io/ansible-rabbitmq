@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Gaetan Trellu (goldyfruit)
-  description: Install RabbitMQ as a single node or as a cluster
+  description: Deploy a RabbitMQ cluster or a single node, supports firewalld and SSL
   company: InCloudUs
   license: license (Apache)
   min_ansible_version: 1.9
@@ -11,12 +11,9 @@ galaxy_info:
     - 7
   - name: Fedora
     versions:
+    - 21
     - 22
-  - name: Ubuntu
-    versions:
-    - trusty
-    - utopic
-    - vivid
+    - 22
   - name: Debian
     versions:
     - jessie
