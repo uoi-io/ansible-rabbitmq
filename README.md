@@ -125,6 +125,10 @@ rabbitmq_firewalld: true
 rabbitmq_management_plugin: true
 rabbitmq_bind_address: 0.0.0.0
 rabbitmq_port: 5672
+rabbitmq_clustering: true
+rabbitmq_cluster_name: 'rabbit'
+rabbitmq_reset_cluster: false
+rabbitmq_erlang_cookie: 'AbCd3rl4ngC00k13WxYz'
 
 rabbitmq_users_list:
   - vhost: /
