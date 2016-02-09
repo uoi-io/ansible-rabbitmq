@@ -1,11 +1,11 @@
 ---
 # file: roles/rabbitmq/tasks/vhosts.yml
 - name: Create RabbitMQ vhost(s)
-  rabbitmq_vhost: >
+  rabbitmq_vhost:
     name={{ item.name }}
     state=present
   with_items: "{{ rabbitmq_vhost_list }}"
-  when: inventory_hostname == master
+  run_once: true
   tags:
     - rabbitmq
     - rabbitmq-vhosts

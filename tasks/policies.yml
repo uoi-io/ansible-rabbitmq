@@ -9,7 +9,7 @@
     tags: "{{ item.tags | default('') }}"
     vhost: "{{ item.vhost | default('/') }}"
   with_items: "{{ rabbitmq_policies_list }}"
-  when: inventory_hostname == master
+  run_once: true
   tags:
     - rabbitmq
     - rabbitmq-policies
