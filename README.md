@@ -18,6 +18,7 @@ rabbitmq_fd_limits will increase the file descriptors limit for the RabbitMQ ser
 ### CONFIG
 ```
 rabbitmq_admin_password: 'Myv3RY5tr0ngPa33w0RD'
+rabbitmq_env_vars: true
 rabbitmq_firewalld: true
 rabbitmq_management_plugin: true
 rabbitmq_bind_address: 0.0.0.0
@@ -118,7 +119,10 @@ rabbitmq_users_list:
 
 ### Cluster
 ```
-master: node-1
+rabbitmq_conf_env:
+  USE_LONGNAME=true
+
+master: node-1.fqdn.org
 rabbitmq_master_name: node-1
 rabbitmq_admin_password: 'Myv3RY5tr0ngPa33w0RD'
 rabbitmq_firewalld: true

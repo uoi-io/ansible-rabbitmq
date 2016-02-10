@@ -41,3 +41,16 @@
   tags:
     - rabbitmq
     - rabbitmq-ssl
+
+- name: Generate environment variables for RabbitMQ
+  template:
+    src=etc/rabbitmq/rabbitmq-env.conf.j2
+    dest=/etc/rabbitmq/rabbitmq-env.conf
+    owner=rabbitmq
+    group=rabbitmq
+    mode=0644
+  notify: restart rabbitmq
+  when: rabbitmq_conf_env is defined and rabbitmq_env_vars == true
+  tags:
+    - rabbitmq
+    - rabbitmq-env-vars

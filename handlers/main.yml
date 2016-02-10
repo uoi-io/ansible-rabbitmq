@@ -1,3 +1,4 @@
 ---
 # file: roles/rabbitmq/handlers/main.yml
 - include: systemctl-reload.yml
+- include: restart-rabbitmq.yml
