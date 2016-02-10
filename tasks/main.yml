@@ -7,7 +7,7 @@
 - include: limits.yml
 
 - include: firewall.yml
-  when: rabbitmq_firewalld and rabbitmq_firewalld == true
+  when: rabbitmq_firewalld is defined and rabbitmq_firewalld == true
 
 # clustered variable is exported and will be used as a condition
 - name: Checking if a RabbitMQ cluster already exists
@@ -16,7 +16,7 @@
   register: clustered
 
 - include: clustering.yml
-  when: rabbitmq_reset_cluster and rabbitmq_clustering or (clustered.stat.exists != True) and rabbitmq_clustering
+  when: rabbitmq_reset_cluster is defined and rabbitmq_clustering or (clustered.stat.exists != True) and rabbitmq_clustering
 
 - include: plugins.yml
 - include: vhosts.yml
