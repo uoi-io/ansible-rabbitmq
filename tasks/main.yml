@@ -16,7 +16,10 @@
   register: clustered
 
 - include: clustering.yml
-  when: rabbitmq_reset_cluster is defined and rabbitmq_clustering or (clustered.stat.exists != True) and rabbitmq_clustering
+  when: rabbitmq_reset_cluster is defined and
+        rabbitmq_reset_cluster == 'true' and
+        rabbitmq_clustering or (clustered.stat.exists != True) and
+        rabbitmq_clustering
 
 - include: plugins.yml
 - include: vhosts.yml
