@@ -2,6 +2,7 @@
 # file: roles/rabbitmq/default/main.yml
 # CONFIG
 rabbitmq_firewalld: true
+rabbitmq_selinux: true
 rabbitmq_erlang_cookie: 'AbCd3rl4ngC00k13WxYz'
 rabbitmq_clustering: true
 rabbitmq_env_vars: true

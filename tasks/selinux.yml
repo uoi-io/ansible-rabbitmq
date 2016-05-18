@@ -1,0 +1,56 @@
+---
+# file: roles/rabbitmq/tasks/selinux.yml
+- name: Labeling SELinux TCP ports for RabbitMQ
+  seport:
+    ports="{{ rabbitmq_port }}"
+    proto=tcp
+    setype=amqp_port_t
+    state=present
+
+- name: Labeling SELinux UDP ports for RabbitMQ
+  seport:
+    ports="{{ rabbitmq_port }}"
+    proto=udp
+    setype=amqp_port_t
+    state=present
+
+- name: Labeling SELinux TCP ports for RabbitMQ SSL
+  seport:
+    ports="{{ rabbitmq_ssl_port }}"
+    proto=tcp
+    setype=amqp_port_t
+    state=present
+  with_items: rabbitmq_ssl is defined and
+              rabbitmq_ssl
+
+- name: Labeling SELinux UDP ports for RabbitMQ SSL
+  seport:
+    ports="{{ rabbitmq_ssl_port }}"
+    proto=udp
+    setype=amqp_port_t
+    state=present
+  with_items: rabbitmq_ssl is defined and
+              rabbitmq_ssl
+
+- name: Labeling SELinux ports for RabbitMQ Management
+  seport:
+    ports=15672
+    proto=tcp
+    setype=amqp_port_t
+    state=present
+  when: rabbitmq_management_plugin is defined and
+        rabbitmq_management_plugin
+
+- name: Labeling SELinux TCP ports for epmd
+  seport:
+    ports=4369
+    proto=tcp
+    setype=epmd_port_t
+    state=present
+
+- name: Labeling SELinux UDP ports for epmd
+  seport:
+    ports=4369
+    proto=udp
+    setype=epmd_port_t
+    state=present
