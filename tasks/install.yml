@@ -6,9 +6,6 @@
     state=latest
     update_cache=yes
   when: ansible_os_family == 'Debian'
-  tags:
-    - rabbitmq
-    - rabbitmq-package
 
 - name: Install RabbitMQ packages (RedHat family)
   yum:
@@ -17,6 +14,3 @@
   with_items: "{{ rabbitmq_rh_packages }}"
   notify: systemctl reload
   when: ansible_os_family == 'RedHat'
-  tags:
-    - rabbitmq
-    - rabbitmq-package

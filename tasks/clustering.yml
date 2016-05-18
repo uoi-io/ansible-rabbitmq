@@ -1,82 +1,57 @@
 ---
 # file: roles/rabbitmq/tasks/clustering.yml
 - name: Killing all RabbitMQ processes
-  shell: pkill -9 -u rabbitmq || true
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
+  shell:
+    pkill -9 -u rabbitmq || true
 
 - name: Cleaning RabbitMQ app everywhere 
   file:
     path=/var/lib/rabbitmq/mnesia
     state=absent
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Starting RabbitMQ service on the master node
   service:
     name=rabbitmq-server
     state=restarted
   when: inventory_hostname == master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Starting RabbitMQ App only on master node
-  command: /usr/sbin/rabbitmqctl start_app
+  command:
+    /usr/sbin/rabbitmqctl start_app
   when: inventory_hostname == master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Set the RabbitMQ cluster name
-  command: /usr/sbin/rabbitmqctl set_cluster_name "{{ rabbitmq_cluster_name }}"
+  command:
+    /usr/sbin/rabbitmqctl set_cluster_name "{{ rabbitmq_cluster_name }}"
   when: inventory_hostname == master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Starting RabbitMQ service everywhere
   service:
     name=rabbitmq-server
     state=restarted
   when: inventory_hostname != master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Stopping the RabbitMQ application
   command: /usr/sbin/rabbitmqctl stop_app
   when: inventory_hostname != master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - pause:
     prompt="Waiting few seconds..."
     seconds=5
 
 - name: Making slave nodes joining the RabbitMQ cluster
-  command: /usr/sbin/rabbitmqctl join_cluster "rabbit@{{ rabbitmq_master_name }}"
+  command:
+    /usr/sbin/rabbitmqctl join_cluster "rabbit@{{ rabbitmq_master_name }}"
   when: inventory_hostname != master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
 - name: Starting RabbitMQ App only on slave node(s)
-  command: /usr/sbin/rabbitmqctl start_app
+  command:
+    /usr/sbin/rabbitmqctl start_app
   when: inventory_hostname != master
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
 
-- name: Finalize the setup by creating file /etc/rabbitmq/clustered
+- name: Finalizing the setup by creating file /etc/rabbitmq/clustered
   copy:
     content="Cluster created:{{ ansible_date_time.date }}"
     dest=/etc/rabbitmq/clustered
-    owner=rabbitmq
-    group=rabbitmq
-  tags:
-    - rabbitmq
-    - rabbitmq-cluster
+    owner="{{ rabbitmq_user }}"
+    group="{{ rabbitmq_group }}"

@@ -1,11 +1,9 @@
 ---
 # files: roles/rabbitmq/tasks/plugins.yml
-- name: Enable RabbitMQ management plugin
+- name: Enabling RabbitMQ management plugin
   rabbitmq_plugin:
     names=rabbitmq_management
     state=enabled
     new_only=yes
-  when: rabbitmq_management_plugin
-  tags:
-    - rabbitmq
-    - rabbitmq-plugins
+  when: rabbitmq_management_plugin is defined and
+        rabbitmq_management_plugin

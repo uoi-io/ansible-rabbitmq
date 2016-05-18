@@ -1,6 +1,6 @@
 ---
 # file: roles/rabbitmq/tasks/users.yml
-- name: Create the RabbitMQ user(s)
+- name: Creating the RabbitMQ user(s)
   rabbitmq_user:
     user={{ item.user }}
     password={{ item.password }}
@@ -13,17 +13,10 @@
     force={{ item.force | default('yes') }}
   with_items: "{{ rabbitmq_users_list }}"
   run_once: true
-  tags:
-    - rabbitmq
-    - rabbitmq-users
 
-- name: Delete the default guest RabbitMQ user
+- name: Deleting the default guest RabbitMQ user
   rabbitmq_user:
     user=guest
     vhost=/
     state=absent
   run_once: true
-  tags:
-    - rabbitmq
-    - rabbitmq-users
-    - rabbitmq-guest-user

@@ -1,19 +1,29 @@
 ---
 # file: roles/rabbitmq/tasks/main.yml
 - include: repository.yml
+  tags: [ rabbitmq, rabbitmq-repo ]
+
 - include: install.yml
+  tags: [ rabbitmq, rabbitmq-package ]
+
 - include: erlang.yml
+  tags: [ rabbitmq, rabbitmq-cookie ]
+
 - include: configuration.yml
+  tags: [ rabbitmq, rabbitmq-config ]
+
 - include: limits.yml
+  tags: [ rabbitmq, rabbitmq-limits ]
 
 - include: firewall.yml
+  tags: [ rabbitmq, rabbitmq-firewalld ]
   when: rabbitmq_firewalld is defined and
         rabbitmq_firewalld
 
 - include: selinux.yml
+  tags: [ rabbitmq, rabbitmq-selinux ]
   when: rabbitmq_selinux is defined and
         rabbitmq_selinux
-  tags: [ rabbitmq, rabbitmq-selinux ]
 
 # clustered variable is exported and will be used as a condition
 - name: Checking if a RabbitMQ cluster already exists
@@ -22,12 +32,20 @@
   register: clustered
 
 - include: clustering.yml
+  tags: [ rabbitmq, rabbitmq-cluster ]
   when: rabbitmq_reset_cluster is defined and
         rabbitmq_reset_cluster and
         rabbitmq_clustering or (clustered.stat.exists != True) and
         rabbitmq_clustering
 
 - include: plugins.yml
+  tags: [ rabbitmq, rabbitmq-plugins ]
+
 - include: vhosts.yml
+  tags: [ rabbitmq, rabbitmq-vhosts ]
+
 - include: policies.yml
+  tags: [ rabbitmq, rabbitmq-policies ]
+
 - include: users.yml
+  tags: [ rabbitmq, rabbitmq-users ]
