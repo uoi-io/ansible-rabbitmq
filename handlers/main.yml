@@ -1,4 +1,9 @@
 ---
 # file: roles/rabbitmq/handlers/main.yml
-- include: systemctl-reload.yml
-- include: restart-rabbitmq.yml
+- name: restart rabbitmq
+  service:
+    name=rabbitmq-server
+    state=restarted
+
+- name: systemctl reload
+  command: systemctl --system daemon-reload
