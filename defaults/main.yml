@@ -3,7 +3,7 @@
 # CONFIG
 rabbitmq_firewalld: true
 rabbitmq_selinux: true
-rabbitmq_erlang_cookie: 'AbCd3rl4ngC00k13WxYz'
+rabbitmq_erlang_cookie: AbCd3rl4ngC00k13WxYz
 rabbitmq_clustering: true
 rabbitmq_env_vars: true
 rabbitmq_cluster_name: rabbit
@@ -17,6 +17,8 @@ rabbitmq_vm_memory: 0.4
 rabbitmq_vm_memory_ratio: 0.5
 rabbitmq_mem_relative: 1.0
 rabbitmq_heartbeat: 10
+rabbitmq_user: rabbitmq
+rabbitmq_group: rabbitmq
 
 # SSL
 rabbitmq_cacert_file: etc/rabbitmq/ssl/cacert.pem
