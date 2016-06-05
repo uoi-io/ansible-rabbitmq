@@ -30,13 +30,14 @@
   stat:
     path=/etc/rabbitmq/clustered
   register: clustered
+  tags: [ rabbitmq, rabbitmq-cluster ]
 
 - include: clustering.yml
   tags: [ rabbitmq, rabbitmq-cluster ]
   when: rabbitmq_reset_cluster is defined and
         rabbitmq_reset_cluster and
-        rabbitmq_clustering or (clustered.stat.exists != True) and
-        rabbitmq_clustering
+        rabbitmq_clustering is defined and
+        rabbitmq_clustering or (clustered.stat.exists != True)
 
 - include: plugins.yml
   tags: [ rabbitmq, rabbitmq-plugins ]
